@@ -1,0 +1,61 @@
+<link rel="import" href="../vendors/paper-input/paper-input.html">
+<link rel="import" href="../vendors/paper-item/paper-item.html">
+<link rel="import" href="../vendors/paper-button/paper-button.html">
+
+<link rel="import" href="../vendors/core-selector/core-selector.html">
+
+<polymer-element name="tour-drawer" attributes="tour">
+
+  <template>
+    <link rel="stylesheet" href="tour-drawer.css" shim-shadowdom>
+    <div id="tour-name">
+      <paper-input
+        label="Tour name"
+        class="dark"
+        committedvalue="{{tour.name}}"
+        floatinglabel>
+      </paper-input>
+      <core-selector selected="{{tour.selectedLocation}}">
+        <template repeat="{{location in tour.locations}}">
+            <paper-item noink>
+              <div>
+                <paper-input label="Location name" class="dark"
+                             value="{{location.name}}"
+                             committedvalue="{{location.name}}">
+                  {{location.name}}
+                </paper-input>
+              </div>
+            </paper-item>
+        </template>
+      </core-selector>
+      <paper-button raised
+                    on-click="{{addPlace}}"
+                    class="red"
+                    style="display:{{tour.name == '' ? 'none' : 'auto'}};">
+        Add place
+      </paper-button>
+    </div>
+  </template>
+
+  <script>
+
+   Polymer("tour-drawer", {
+
+     ready: function() {
+     },
+
+     addPlace: function() {
+       var e = new Event('add-place');
+       this.tour.locations.push({
+         latitude: null,
+         longitude: null,
+         name: "foobar"
+       });
+       this.tour.selectedLocation = this.tour.length - 1;
+       window.dispatchEvent(e);
+     }
+   });
+
+  </script>
+
+</polymer-element>

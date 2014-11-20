@@ -1,0 +1,59 @@
+<link rel="import" href="../vendors/core-scaffold/core-scaffold.html">
+<link rel="import" href="../vendors/core-header-panel/core-header-panel.html">
+<link rel="import" href="../vendors/core-toolbar/core-toolbar.html">
+
+<link rel="import" href="../vendors/paper-shadow/paper-shadow.html">
+
+<link rel="import" href="../vendors/google-map/google-map.html">
+
+<link rel="import" href="./tour-drawer.html">
+<link rel="import" href="./location-editor.html">
+
+<polymer-element name="main-screen" attributes="menuTitle mainTitle">
+
+  <template>
+    <link rel="stylesheet" href="main-screen.css" shim-shadowdom>
+    <core-scaffold id="scaffold">
+      <core-header-panel navigation flex id="drawer">
+        <core-toolbar>
+          <span>{{menuTitle}}</span>
+        </core-toolbar>
+        <tour-drawer tour="{{tour}}"></tour-drawer>
+      </core-header-panel>
+
+      <span tool>
+        {{mainTitle}}
+        <paper-shadow z="1"></paper-shadow>
+      </span>
+
+      <div class="content">
+        <location-editor id="locationEditor"></location-editor>
+      </div>
+    </core-scaffold>
+  </template>
+
+  <script>
+
+   Polymer("main-screen", {
+
+     ready: function() {
+       window.addEventListener('add-place', this.addPlace.bind(this));
+       this.scaffold = this.$.scaffold;
+       this.locationEditor = this.$.locationEditor;
+     },
+
+     addPlace: function() {
+       this.locationEditor.clear();
+       this.scaffold.togglePanel();
+     },
+
+     tour: {
+       name: "",
+       locations: [],
+       selectedLocation: 0
+     }
+   });
+
+  </script>
+
+</polymer-element>

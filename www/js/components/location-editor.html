@@ -1,0 +1,36 @@
+<link rel="import" href="../vendors/google-map/google-map.html">
+
+<polymer-element name="location-editor" attributes="location">
+
+  <template>
+    <link rel="stylesheet" href="location-editor.css" shim-shadowdom>
+    <google-map id="map"
+                apiKey="AIzaSyCieCmUN4RcOP5Ikf_WJhokNzP94D-1G3c"
+                latitude="37.4268"
+                longitude="-122.1705"
+                zoom="17"
+                fit
+                disableDefaultUI>
+      <google-map-marker id="marker"
+                         latitude="37.4268"
+                         longitude="-122.1705"
+                         draggable="true">
+      </google-map-marker>
+    </google-map>
+  </template>
+
+  <script>
+   Polymer("location-editor", {
+     clear: function() {
+     },
+
+     mapReady: function() {
+     },
+
+     ready: function() {
+       window.addEventListener('google-map-ready', this.mapReady.bind(this));
+     }
+   });
+  </script>
+
+</polymer-element>
