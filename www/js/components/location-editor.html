@@ -4,18 +4,22 @@
 
   <template>
     <link rel="stylesheet" href="location-editor.css" shim-shadowdom>
-    <google-map id="map"
-                apiKey="AIzaSyCieCmUN4RcOP5Ikf_WJhokNzP94D-1G3c"
-                latitude="37.4268"
-                longitude="-122.1705"
-                zoom="17"
-                fit
-                disableDefaultUI>
-      <google-map-marker id="marker"
-                         latitude="37.4268"
-                         longitude="-122.1705"
-                         draggable="true">
-      </google-map-marker>
+    <google-map
+      id="map"
+      apiKey="AIzaSyCieCmUN4RcOP5Ikf_WJhokNzP94D-1G3c"
+      latitude="{{location && location.latitude ? location.latitude : 37.4268}}"
+      longitude="{{location && location.longitude ? location.longitude : -122.17}}"
+      zoom="17"
+      fit
+      disableDefaultUI>
+      <template if="{{location.latitude && location.longitude}}">
+        <google-map-marker id="marker"
+                           latitude="{{location.latitude}}"
+                           longitude="{{location.longitude}}"
+                           radius="{{location.radius}}"
+                           draggable="true">
+        </google-map-marker>
+      </template>
     </google-map>
   </template>
 
@@ -25,6 +29,13 @@
      },
 
      mapReady: function() {
+       this.map = this.$.map.getMap();
+       google.maps.event.addListener(this.map, 'click', (function(e) {
+         if (this.location) {
+           this.location.latitude = e.latLng.lat();
+           this.location.longitude = e.latLng.lng();
+         }
+       }).bind(this));
      },
 
      ready: function() {

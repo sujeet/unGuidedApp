@@ -37,12 +37,19 @@
 paper-button.red {
     color: #fff;
     background-color: #db4437;
-    margin-left: 20px;
-    width: 67%;
+    margin-top: 15px;
+    width: 82%;
 }
 
-#tour-name paper-input {
+paper-input.tour-name {
     margin-left: 20px;
+    width: 83%;
+}
+
+paper-input.location-name {
+    margin-left: 20px;
+    width: 136%;
+    font-size: 12px;
 }
 
 core-menu {

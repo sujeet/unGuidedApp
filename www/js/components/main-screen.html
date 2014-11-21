@@ -16,7 +16,9 @@
     <core-scaffold id="scaffold">
       <core-header-panel navigation flex id="drawer">
         <core-toolbar>
-          <span>{{menuTitle}}</span>
+      <div horizontal center-justified layout style="width:100%;">
+          <div>{{menuTitle}}</div>
+      </div>
         </core-toolbar>
         <tour-drawer tour="{{tour}}"></tour-drawer>
       </core-header-panel>
@@ -27,7 +29,10 @@
       </span>
 
       <div class="content">
-        <location-editor id="locationEditor"></location-editor>
+        <location-editor
+          id="locationEditor"
+          location="{{tour.selectedLocation}}">
+        </location-editor>
       </div>
     </core-scaffold>
   </template>
@@ -50,7 +55,8 @@
      tour: {
        name: "",
        locations: [],
-       selectedLocation: 0
+       selectedLocationIdx: -1,
+       selectedLocation: null
      }
    });
 
