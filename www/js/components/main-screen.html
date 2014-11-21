@@ -3,6 +3,7 @@
 <link rel="import" href="../vendors/core-toolbar/core-toolbar.html">
 
 <link rel="import" href="../vendors/paper-shadow/paper-shadow.html">
+<link rel="import" href="../vendors/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../vendors/google-map/google-map.html">
 
@@ -13,26 +14,45 @@
 
   <template>
     <link rel="stylesheet" href="main-screen.css" shim-shadowdom>
+
     <core-scaffold id="scaffold">
       <core-header-panel navigation flex id="drawer">
         <core-toolbar>
-      <div horizontal center-justified layout style="width:100%;">
-          <div>{{menuTitle}}</div>
-      </div>
+          <div horizontal center-justified layout style="width:100%;">
+            <div>{{menuTitle}}</div>
+          </div>
         </core-toolbar>
         <tour-drawer tour="{{tour}}"></tour-drawer>
       </core-header-panel>
 
-      <span tool>
-        {{mainTitle}}
+      <div vertical layout tool>
+        <div fit horizontal center-justified layout
+             style="width:50%; margin:auto;">
+          <div class="appname">{{mainTitle}}</div>
+        </div>
         <paper-shadow z="1"></paper-shadow>
-      </span>
+      </div>
 
-      <div class="content">
-        <location-editor
-          id="locationEditor"
-          location="{{tour.selectedLocation}}">
-        </location-editor>
+      <div vertical layout>
+        <!-- <div class="bottom fit" horizontal layout>
+        <paper-tabs selected="0" fit flex role="tablist" horizontal center layout>
+        <paper-tab role="tab" inline flex center-center horizontal layout>
+        ITEM ONE
+        </paper-tab>
+        <paper-tab role="tab" inline flex center-center horizontal layout>
+        ITEM TWO
+        </paper-tab>
+        <paper-tab role="tab" inline flex center-center horizontal layout>
+        ITEM THREE
+        </paper-tab>
+        </paper-tabs>
+        </div> -->
+        <div class="content">
+          <location-editor
+            id="locationEditor"
+            location="{{tour.selectedLocation}}">
+          </location-editor>
+        </div>
       </div>
     </core-scaffold>
   </template>
@@ -42,13 +62,12 @@
    Polymer("main-screen", {
 
      ready: function() {
-       window.addEventListener('add-place', this.addPlace.bind(this));
        this.scaffold = this.$.scaffold;
        this.locationEditor = this.$.locationEditor;
+       window.addEventListener('add-place', this.addPlace.bind(this));
      },
 
      addPlace: function() {
-       this.locationEditor.clear();
        this.scaffold.togglePanel();
      },
 

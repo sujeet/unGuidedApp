@@ -17,9 +17,15 @@ core-header-panel {
     color: #fafafa;
 }
 
-/* .content { */
-/*     padding: 20px; */
-/* } */
+.content {
+    /* position: relative; */
+}
+
+.appname {
+    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+    color: #fff;
+    font-size: 1.8em;
+}
 
 /*
 http://stackoverflow.com/questions/24594333/polymer-core-scaffold-coloring-and-paper-button
