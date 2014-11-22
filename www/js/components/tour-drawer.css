@@ -59,3 +59,7 @@ core-menu {
 paper-item.core-selected {
     background-color: #3e454a;
 }
+
+.tour-drawer-container {
+    z-index: 5;
+}

@@ -23,3 +23,8 @@ paper-fab.blue {
 #secondary-media {
     margin-bottom: 50px;
 }
+
+.waveform {
+    z-index: 1;
+    background-color: rgba(0,0,0,0.8);
+}

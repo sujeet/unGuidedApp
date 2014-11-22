@@ -10,7 +10,7 @@
 
   <template>
     <link rel="stylesheet" href="tour-drawer.css" shim-shadowdom>
-    <div layout vertical fit>
+    <div class="tour-drawer-container" layout vertical fit>
       <paper-input
         label="Tour name"
         class="dark tour-name"
@@ -40,7 +40,8 @@
           Add Location
         </paper-button>
       </div>
-      <div flex vertical reverse layout>
+      <div flex vertical reverse layout
+          style="display:{{tour.locations.length == 0 ? 'none' : 'auto'}};">
         <paper-tabs class="top" selected="0">
           <paper-tab> <core-icon icon="lock"></core-icon> </paper-tab>
           <paper-tab> <core-icon icon="account-child"></core-icon> </paper-tab>

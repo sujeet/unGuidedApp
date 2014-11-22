@@ -7,6 +7,12 @@
   <template>
     <link rel="stylesheet" href="location-editor.css" shim-shadowdom>
     <div fit vertical layout reverse>
+      <div
+        class="waveform"
+        style="display:{{recording ? 'block;' : 'none;'}}"
+        fit>
+	    <canvas id="analyser" width="1024" height="500"></canvas>
+      </div>
       <google-map
         id="map"
         apiKey="AIzaSyCieCmUN4RcOP5Ikf_WJhokNzP94D-1G3c"
@@ -30,14 +36,14 @@
           id="video"
           class="blue"
           style="display:{{expanded ? 'block;' : 'none;'}}"
-          src="../vendors/icon/av/2x_web/ic_videocam_white_24dp.png"">
+          src="../vendors/icon/av/2x_web/ic_videocam_white_24dp.png">
         </paper-fab>
         <paper-fab
           mini
           id="photo"
           class="blue"
           style="display:{{expanded ? 'block;' : 'none;'}}"
-          src="../vendors/icon/image/2x_web/ic_camera_alt_white_24dp.png"">
+          src="../vendors/icon/image/2x_web/ic_camera_alt_white_24dp.png">
         </paper-fab>
         <paper-fab
           mini
@@ -51,19 +57,28 @@
           id="text"
           class="blue"
           style="display:{{expanded ? 'block;' : 'none;'}}"
-          src="../vendors/icon/hardware/2x_web/ic_keyboard_white_24dp.png"">
+          src="../vendors/icon/hardware/2x_web/ic_keyboard_white_24dp.png">
         </paper-fab>
         <paper-fab
           mini
           id="link"
           class="blue"
           style="display:{{expanded ? 'block;' : 'none;'}}"
-          src="../vendors/icon/content/2x_web/ic_link_white_24dp.png"">
+          src="../vendors/icon/content/2x_web/ic_link_white_24dp.png">
         </paper-fab>
       </div>
 
       <div id="voice" layout horizontal center-justified>
-        <paper-fab icon="settings-voice"></paper-fab>
+        <paper-fab
+          style="display:{{recording ? 'block;' : 'none;'}} z-index:2;"
+          src="../vendors/icon/av/2x_web/ic_stop_white_48dp.png"
+          on-click="{{toggleRecord}}">
+        </paper-fab>
+        <paper-fab
+          style="display:{{recording ? 'none;' : 'block;'}}"
+          src="../vendors/icon/av/2x_web/ic_mic_white_48dp.png"
+          on-click="{{toggleRecord}}">
+        </paper-fab>
       </div>
     </div>
   </template>
@@ -87,7 +102,15 @@
        }).bind(this));
      },
 
+     toggleRecord: function() {
+       this.recording = ! this.recording;
+     },
+
      ready: function() {
+       this.recording = false;
+       analyser_canvas = this.$.analyser;
+       console.log(analyser_canvas);
+       initAudio();
        window.addEventListener('google-map-ready', this.mapReady.bind(this));
        this.expanded = false;
      }
