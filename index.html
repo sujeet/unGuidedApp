@@ -47,6 +47,13 @@
          window.setTimeout(resize, 50);
      }
      resize();
+     function resize2() {
+       if (window.swiperagain)
+         swiperagain.reInit();
+       else
+         window.setTimeout(resize2, 50);
+     }
+     resize2();
     </script>
   </body>
 </html>

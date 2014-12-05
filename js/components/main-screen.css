@@ -74,6 +74,8 @@ core-scaffold::shadow core-header-panel::shadow #mainContainer {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 1em black;
+  transition: height 0.5s;
+  transition: width 0.5s;
 }
 
 .location-title {
@@ -105,4 +107,81 @@ core-scaffold::shadow core-header-panel::shadow #mainContainer {
 
 .location-action-button {
   /* background-color: #1d9bf5; */
+}
+
+.expanded-location {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.location-perspectives {
+  overflow: scroll;
+  height: 160px;
+}
+
+.location-perspective {
+  margin: 2px;
+  padding: 10px;
+}
+
+.location-perspective-profile-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-size: cover;
+}
+
+.expanded-location .location-card {
+  width: 100%;
+}
+
+.location-perspective-profile-name-container {
+  width: 70%;
+}
+
+.location-perspective-profile-name {
+  width: 100%;
+  padding-left: 20px;
+  font-size: 1.3em;
+}
+
+.location-perspective-play-button {
+  width: 44.75px;
+  height: 44.75px;
+  min-width: 44.75px;
+  border-radius: 22.3px;
+  background-color: #1d9bf5;
+}
+
+.location-image {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 160px !important;
+  height: 120px !important;
+  background-position: center;
+  background-size: cover;
+  border-radius: 3px;
+  border: solid 2px white;
+}
+
+#swiperagain {
+  height: 160px;
+  background-color: #222;
+}
+
+.location-text-blurb {
+  padding: 25px;
+  height: 200px;
+  overflow: scroll;
+}
+
+#close-button {
+  top: -55px;
+  right: -82%;
 }
