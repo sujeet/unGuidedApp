@@ -55,3 +55,54 @@ core-scaffold::shadow core-header-panel {
     /* background: #333; */
     /* color: #fafafa; */
 }
+
+core-scaffold::shadow core-header-panel::shadow #mainContainer {
+  background-color: #222;
+}
+
+#swiper {
+  margin-top: 50px;
+}
+
+#swiper .swiper-wrapper {
+  margin-left: -23px;
+}
+
+.location-card {
+  width: 200px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 1em black;
+}
+
+.location-title {
+  text-align: center;
+  background-color: #1d9bf5;
+  color: #fff;
+  font-size: 1.5em;
+  padding: 15px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.location-picture {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 160px;
+  height: 160px;
+  background-position: center;
+  background-image: url("../../locations/MemAud/chu_video.jpg");
+  background-size: cover;
+  border-radius: 3px;
+}
+
+.location-buttons {
+  margin-left: 10px;
+  margin-right: 14px;
+  margin-bottom: 10px;
+}
+
+.location-action-button {
+  /* background-color: #1d9bf5; */
+}

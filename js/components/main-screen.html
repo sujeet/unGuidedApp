@@ -1,9 +1,12 @@
 <link rel="import" href="../vendors/core-scaffold/core-scaffold.html">
+<link rel="import" href="../vendors/core-icon/core-icon.html">
+<link rel="import" href="../vendors/core-icons/av-icons.html">
 <link rel="import" href="../vendors/core-header-panel/core-header-panel.html">
 <link rel="import" href="../vendors/core-toolbar/core-toolbar.html">
 
 <link rel="import" href="../vendors/paper-shadow/paper-shadow.html">
 <link rel="import" href="../vendors/paper-tabs/paper-tabs.html">
+<link rel="import" href="../vendors/paper-button/paper-button.html">
 
 <link rel="import" href="../vendors/google-map/google-map.html">
 
@@ -14,11 +17,35 @@
 
   <template>
     <link rel="stylesheet" href="main-screen.css" shim-shadowdom>
+    <link rel="stylesheet" href="../../css/idangerous.swiper.css" shim-shadowdom>
+    <link rel="stylesheet" href="../../css/idangerous.swiper.3dflow.css" shim-shadowdom>
 
     <core-scaffold id="scaffold" selectedTab="{{selectedTab}}">
       <!-- Discover -->
-      <template if="{{selectedTab == 0}}">
-      </template>
+      <div style="display:{{selectedTab == 0 ? 'block;' : 'none;'}}">
+        <div id="swiper" class="swiper-container">
+          <div class="swiper-wrapper">
+            <template repeat="{{location in locations}}">
+              <div class="swiper-slide swiper-slide-location"> 
+                <div vertical layout class="location-card">
+                  <div class="location-title"> {{location.title}} </div>
+                  <div class="location-picture"
+                       style="background-image:url('{{location.picture}}');">
+                  </div>
+                  <div horizontal layout class="location-buttons">
+                    <paper-button flex class="location-action-button">
+                      <core-icon icon="info-outline"> </core-icon>
+                    </paper-button>
+                    <paper-button flex class="location-action-button">
+                      <core-icon icon="av:play-arrow"> </core-icon>
+                    </paper-button>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
 
       <!-- Take a tour -->
       <template if="{{selectedTab == 1}}">
@@ -50,12 +77,36 @@
   <script>
 
    Polymer("main-screen", {
-     selectedTab: 2,
+     selectedTab: 0,
+
+     makeSwiper: function() {
+       console.log('yolo');
+       console.log(this.$.swiper);
+       window.mySwiper = new Swiper(this.$.swiper, {
+         slidesPerView: 3,
+         loop: true,
+         tdFlow: {shadows:false}});
+       console.log(window.mySwiper);
+       /* var mySwiper = new Swiper(this.$.swiper, {
+          //Your options here:
+          mode:'horizontal',
+          loop: false,
+          slidesPerView: 3,
+          //etc..
+          tdFlow: {
+          rotate : 50,
+          stretch :0,
+          depth: 100,
+          modifier : 1,
+          shadows : true
+          }}); */
+     },
 
      ready: function() {
        this.scaffold = this.$.scaffold;
        this.locationEditor = this.$.locationEditor;
        window.addEventListener('add-place', this.addPlace.bind(this));
+       this.makeSwiper();
      },
 
      addPlace: function() {
@@ -67,7 +118,35 @@
        locations: [],
        selectedLocationIdx: -1,
        selectedLocation: null,
-     }
+     },
+
+     locations: [
+       {
+         title: "Encina Hall",
+         picture: "../../locations/EncinaHall/Encina.jpg",
+         audio: ""
+       },
+       {
+         title: "Hoover Tower",
+         picture: "../../locations/HooverTower/Hoover-View-3.jpg",
+         audio: ""
+       },
+       {
+         title: "Main Quad",
+         picture: "../../locations/MainQuad/Stanford_University_Arches.JPG",
+         audio: ""
+       },
+       {
+         title: "Memorial Audi.",
+         picture: "../../locations/MemAud/crowd-3eb.jpg",
+         audio: ""
+       },
+       {
+         title: "Mem. Church",
+         picture: "../../locations/MemChu/Memchu_altar_pulpit.jpg",
+         audio: ""
+       }
+     ],
    });
 
   </script>

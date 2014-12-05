@@ -27,6 +27,12 @@
 
     <!-- here your own components -->
     <link rel="import" href="js/components/main-screen.html">
+
+    <link rel="stylesheet" href="css/idangerous.swiper.css">
+    <script defer src="js/idangerous.swiper.min.js"></script>
+    <script defer src="js/idangerous.swiper.3dflow.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
   </head>
 
   <body unresolved>
@@ -34,7 +40,13 @@
     <script type="text/javascript" src="js/index.js"></script>
     <main-screen menuTitle="Tour" mainTitle="unGuided"></main-screen>
     <script type="text/javascript">
-     app.initialize();
+     function resize() {
+       if (window.mySwiper)
+         mySwiper.reInit();
+       else
+         window.setTimeout(resize, 50);
+     }
+     resize();
     </script>
   </body>
 </html>
