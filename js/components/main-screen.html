@@ -15,33 +15,42 @@
   <template>
     <link rel="stylesheet" href="main-screen.css" shim-shadowdom>
 
-    <core-scaffold id="scaffold">
-      <core-header-panel navigation flex id="drawer">
-        <tour-drawer id="tour-drawer" tour="{{tour}}"></tour-drawer>
-      </core-header-panel>
+    <core-scaffold id="scaffold" selectedTab="{{selectedTab}}">
+      <!-- Discover -->
+      <template if="{{selectedTab == 0}}">
+      </template>
 
-      <div vertical layout tool>
-        <!-- <div fit horizontal center-justified layout
-        style="width:50%; margin:auto;">
-        <div class="appname">{{mainTitle}}</div>
-        </div> -->
-        <paper-shadow z="1"></paper-shadow>
-      </div>
+      <!-- Take a tour -->
+      <template if="{{selectedTab == 1}}">
+      </template>
 
-      <div vertical layout>
-        <div class="content">
-          <location-editor
-            id="locationEditor"
-            location="{{tour.selectedLocation}}">
-          </location-editor>
+      <!-- Tour Creation -->
+      <template if="{{selectedTab == 2}}">
+        <core-header-panel navigation flex id="drawer">
+          <tour-drawer id="tour-drawer" tour="{{tour}}"></tour-drawer>
+        </core-header-panel>
+
+        <div vertical layout tool>
+          <paper-shadow z="1"></paper-shadow>
         </div>
-      </div>
+
+        <div vertical layout>
+          <div class="content">
+            <location-editor
+              id="locationEditor"
+              location="{{tour.selectedLocation}}">
+            </location-editor>
+          </div>
+        </div>
+      </template>
+
     </core-scaffold>
   </template>
 
   <script>
 
    Polymer("main-screen", {
+     selectedTab: 2,
 
      ready: function() {
        this.scaffold = this.$.scaffold;

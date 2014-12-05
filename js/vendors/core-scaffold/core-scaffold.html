@@ -70,7 +70,7 @@ To have the content fit to the main area, use `fit` attribute.
 <link rel="import" href="../core-icon-button/core-icon-button.html">
 <link rel="import" href="../paper-tabs/paper-tabs.html">
 
-<polymer-element name="core-scaffold">
+<polymer-element name="core-scaffold" attributes="selectedTab">
 <template>
 
   <style>
@@ -112,14 +112,25 @@ To have the content fit to the main area, use `fit` attribute.
 
       <core-toolbar>
         <template if="{{!rightDrawer}}">
-          <core-icon-button id="menuButton" icon="menu" on-tap="{{togglePanel}}"></core-icon-button>
+          <template if="{{selectedTab == 2}}">
+            <core-icon-button id="menuButton"
+                              icon="menu"
+                              on-tap="{{togglePanel}}">
+            </core-icon-button>
+          </template>
         </template>
         <content select="[tool]"></content>
         <template if="{{rightDrawer}}">
-          <core-icon-button id="menuButton" icon="menu" on-tap="{{togglePanel}}"></core-icon-button>
+          <template if="{{selectedTab == 2}}">
+            <core-icon-button id="menuButton"
+                              icon="menu"
+                              on-tap="{{togglePanel}}">
+            </core-icon-button>
+          </template>
         </template>
         <div class="bottom fit" horizontal layout>
-          <paper-tabs selected="2" flex role="tablist" horizontal center layout>
+          <paper-tabs selected="{{selectedTab}}"
+                      flex role="tablist" horizontal center layout>
             <paper-tab role="tab" inline flex center-center horizontal layout>
               Discover
             </paper-tab>
