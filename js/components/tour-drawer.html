@@ -35,7 +35,7 @@
         <paper-button
           class="red"
           on-click="{{addPlace}}"
-          style="display:{{tour.name == '' ? 'none' : 'auto'}};"
+          style="display:{{tour.name == '' || (tour.locations.length != 0 && tour.locations[tour.locations.length-1].name == '') ? 'none' : 'auto'}};"
           mini>
           Add Location
         </paper-button>

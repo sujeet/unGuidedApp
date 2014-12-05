@@ -80,12 +80,25 @@
           on-click="{{toggleRecord}}">
         </paper-fab>
       </div>
+        <paper-fab
+          id="done-location"
+          class="green"
+          icon="check"
+          style="display:{{!recording && pinDropped ? 'block;' : 'none;'}}"
+          on-click="{{openDrawer}}">
+        </paper-fab>
     </div>
   </template>
 
   <script>
    Polymer("location-editor", {
+     pinDropped: false,
+
      clear: function() {
+     },
+
+     openDrawer: function() {
+       window.dispatchEvent(new Event('add-place'));
      },
 
      expand: function() {
@@ -98,6 +111,7 @@
          if (this.location) {
            this.location.latitude = e.latLng.lat();
            this.location.longitude = e.latLng.lng();
+           this.pinDropped = true;
          }
        }).bind(this));
      },
@@ -113,6 +127,7 @@
        initAudio();
        window.addEventListener('google-map-ready', this.mapReady.bind(this));
        this.expanded = false;
+       window.setTimeout(this.openDrawer, 5);
      }
    });
   </script>

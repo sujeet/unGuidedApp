@@ -131,7 +131,10 @@
                       class="location-action-button">
                       <core-icon icon="info-outline"> </core-icon>
                     </paper-button>
-                    <paper-button flex class="location-action-button">
+                    <paper-button
+                      flex
+                      on-click="{{toggleAudio}}"
+                      class="location-action-button">
                       <core-icon icon="av:play-arrow"> </core-icon>
                     </paper-button>
                   </div>
@@ -144,6 +147,182 @@
 
       <!-- Take a tour -->
       <template if="{{selectedTab == 1}}">
+        <template if="{{selectingTour}}">
+        <div layout vertical>
+          <template repeat="{{tour in available_tours}}">
+            <div layout horizontal class="tour" on-click="{{checkTour}}">
+              <div class="tour-picture"
+                   style="background-image:url('{{tour.picture}}');">
+              </div>
+              <div layout vertical flex class="tour-info">
+                <div class="tour-name"> {{tour.name}} </div>
+                <div layout horizontal class="tour-details" flex end> 
+                  <div class="tour-length" flex> {{tour.length}} mi. </div>
+                  <div class="tour-time" flex> {{tour.time}} min </div>
+                  <div class="tour-spots" flex> {{tour.spots}} spots </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+        </template>
+        <template if="{{checkingTour}}">
+          <div layout vertical class="big-tour">
+            <div class="big-tour-name">Stanford's Must-see Spots</div>
+            <div class="big-tour-byline">by Sam Portilla</div>
+            <div class="big-tour-map"></div>
+            <paper-button
+              class="red"
+              on-click="{{takeTour}}">
+              Let's go!
+            </paper-button>
+            <div class="big-tour-reviews">
+              <div layout horizontal class="big-tour-review">
+                <div
+                  class="big-tour-review-profile-picture"
+                  style="background-image:url(http://lorempixel.com/200/200/people/3);">
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-name">
+                  Sujeet Gholap
+                </div>
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-content">
+                  Enjoyed the trip thoroughly. A must-see indeed....
+                </div>
+                </div>
+              </div>
+              <div layout horizontal class="big-tour-review">
+                <div
+                  class="big-tour-review-profile-picture"
+                  style="background-image:url(http://lorempixel.com/200/200/people/2);">
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-name">
+                  Kevin Zhai
+                </div>
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-content">
+                  Sam's experiences were hilarious! Awesome trip!
+                </div>
+                </div>
+              </div>
+              <div layout horizontal class="big-tour-review">
+                <div
+                  class="big-tour-review-profile-picture"
+                  style="background-image:url(http://lorempixel.com/200/200/people/5);">
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-name">
+                  James Bond
+                </div>
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-content">
+                  I won't recommend this, 30 minutes is too short. It all felt rushed.
+                </div>
+                </div>
+              </div>
+              <div layout horizontal class="big-tour-review">
+                <div
+                  class="big-tour-review-profile-picture"
+                  style="background-image:url(http://lorempixel.com/200/200/people/6);">
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-name">
+                  Angela Chu
+                </div>
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-content">
+                  Wow! Amazing! Make more such trips!!!
+                </div>
+                </div>
+              </div>
+              <div layout horizontal class="big-tour-review">
+                <div
+                  class="big-tour-review-profile-picture"
+                  style="background-image:url(http://lorempixel.com/200/200/people/9);">
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-name">
+                  Barbie Doll
+                </div>
+                </div>
+                <div layout horizontal center>
+                <div class="big-tour-review-content">
+                  The narration was a bit dull. I almost fell asleep!
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template if="{{takingTour}}">
+        <div style="display:{{expandedLocation != null ? 'block;' : 'none;'}}">
+          <div class="expanded-location">
+            <div vertical layout class="location-card"
+                 expanded="{{ location.expanded }}">
+              <div class="location-title"> {{expandedLocation.title}} </div>
+              <div class="location-image-gallary">
+                <div id="swiperagain" class="swiper-container">
+                  <div class="swiper-wrapper">
+                    <template repeat="{{picture in pictures}}">
+                      <div class="location-image swiper-slide"
+                           style="background-image:url('{{picture}}');">
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <div class="location-text-blurb">
+                {{expandedLocation.text}}
+              </div>
+              <paper-fab
+                on-click="{{closeInfoBox}}"
+                id="close-button" icon="clear" class="red"></paper-fab>
+            </div>
+          </div>
+        </div>
+        <div layout vertical>
+            <template repeat="{{location in locations}}">
+              <div vertical layout class="location-card in-tour">
+                <div class="location-title"> {{location.title}} </div>
+                <div class="location-picture"
+                     style="background-image:url('{{location.picture}}');">
+                </div>
+                <div horizontal layout class="location-buttons">
+                  <paper-button
+                    flex
+                    onclick="var e=new Event('expand'); e.origin=this; window.dispatchEvent(e);"
+                    class="location-action-button">
+                    <core-icon icon="info-outline"> </core-icon>
+                  </paper-button>
+                  <paper-button flex class="location-action-button">
+                    <core-icon icon="av:play-arrow"> </core-icon>
+                  </paper-button>
+                </div>
+              </div>
+              <template if="{{!mapVisible}}">
+                <paper-button
+                  on-click="{{showMap}}"
+                  class="show-map-button">
+                  Show Map
+                </paper-button>
+              </template>
+                <div
+                  class="directions-map"
+                  style="height:{{mapVisible ? '300px;' : '0px;'}}margin-top:{{mapVisible ? '-30px;' : '0px;'}} margin-bottom:{{mapVisible ? '-30px;' : '0px;'}}">
+                  <paper-fab
+                    on-click="{{hideMap}}"
+                    style="display:{{mapVisible ? 'block;' : 'none;'}}"
+                    icon="clear" class="red close-map-button"></paper-fab>
+                </div>
+            </template>
+        </div>
+        </template>
       </template>
 
       <!-- Tour Creation -->
@@ -174,24 +353,36 @@
    Polymer("main-screen", {
      selectedTab: 0,
 
+     mapVisible: false,
+     selectingTour: true,
+     checkingTour: false,
+     takingTour: false,
+
+     hideMap: function() {
+       this.mapVisible = false;
+     },
+     
+     showMap: function() {
+       this.mapVisible = true;
+     },
+
+     takeTour: function() {
+       this.selectingTour = false;
+       this.checkingTour = false;
+       this.takingTour = true;
+     },
+
+     checkTour: function() {
+       this.selectingTour = false;
+       this.takingTour = false;
+       this.checkingTour = true;
+     },
+
      makeSwiper: function() {
        window.mySwiper = new Swiper(this.$.swiper, {
          slidesPerView: 3,
          loop: true,
          tdFlow: {shadows:false}});
-       /* var mySwiper = new Swiper(this.$.swiper, {
-          //Your options here:
-          mode:'horizontal',
-          loop: false,
-          slidesPerView: 3,
-          //etc..
-          tdFlow: {
-          rotate : 50,
-          stretch :0,
-          depth: 100,
-          modifier : 1,
-          shadows : true
-          }}); */
      },
 
      ready: function() {
@@ -273,6 +464,50 @@
          "../../locations/MainQuad/Stanford_University_Arches.JPG",
          "../../locations/MemAud/crowd-3eb.jpg",
          "../../locations/MemChu/Memchu_altar_pulpit.jpg",
+     ],
+
+     toggleAudio: function() {
+       console.log('hehe');
+       /* console.log(window.audio);
+          window.audio.play(); */
+     },
+
+     available_tours: [
+       {
+         name:"Stanford's must-see",
+         picture:"../../locations/1.png",
+         length:1.5,
+         spots:5,
+         time:30
+       },
+       {
+         name:"My Lake Lag Story",
+         picture:"../../locations/2.png",
+         length:0.4,
+         spots:7,
+         time:15
+       },
+       {
+         name:"Arts at Stanford",
+         picture:"../../locations/3.png",
+         length:0.6,
+         spots:22,
+         time:45
+       },
+       {
+         name:"My Quarterback Years",
+         picture:"../../locations/4.png",
+         length:.03,
+         spots:9,
+         time:30
+       },
+       {
+         name:"One time, I was on the Row...",
+         picture:"../../locations/5.png",
+         length:0.7,
+         spots:4,
+         time:15
+       }
      ],
    });
 

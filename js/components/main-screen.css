@@ -185,3 +185,124 @@ core-scaffold::shadow core-header-panel::shadow #mainContainer {
   top: -55px;
   right: -82%;
 }
+
+.tour {
+  padding: 20px;
+}
+
+.tour-picture {
+  margin-right: 20px;
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 3px;
+}
+
+.tour-info {
+  color: white;
+}
+
+.tour-name {
+  padding-top: 15px;
+  font-size: 1.5em;
+}
+
+.tour-details {
+  padding-bottom: 15px;
+}
+
+.big-tour {
+  padding: 20px;
+  color: white;
+  height: 100%;
+}
+
+.big-tour-name {
+  font-size: 2em;
+}
+
+.big-tour-byline {
+  text-align: right;
+}
+
+.big-tour-map {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 230px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../../locations/big-tour.png");
+  border-radius: 5px;
+}
+
+paper-button.red {
+  color: #fff;
+  background-color: #db4437;
+  margin-top: 15px;
+  margin: auto;
+  width: 230px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.big-tour-review-profile-picture {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-size: cover;
+  border: solid 2px #ccc;
+}
+
+.big-tour-reviews {
+  margin-top: 20px;
+}
+
+.big-tour-review {
+  margin-bottom: 20px;
+}
+
+.big-tour-review-name {
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.big-tour-review-content {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.in-tour {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  z-index: 5;
+}
+
+.want-padding {
+  padding-top : 50px;
+}
+
+.show-map-button {
+  margin: auto;
+  background-color: #ddd;
+}
+
+.directions-map {
+  margin: auto;
+  margin-top: -30px;
+  margin-bottom: -30px;
+  transition: height 0.5s;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../../locations/directions.png");
+}
+
+.close-map-button {
+  top: 230px;
+  right: -82%;
+}

@@ -39,6 +39,7 @@
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script type="text/javascript" src="js/index.js"></script>
     <main-screen menuTitle="Tour" mainTitle="unGuided"></main-screen>
+    <audio id="audio" src="./locations/MemChu.m4a" preload="auto"></audio>
     <script type="text/javascript">
      function resize() {
        if (window.mySwiper)
@@ -54,6 +55,7 @@
          window.setTimeout(resize2, 50);
      }
      resize2();
+     window.audio = document.getElementsByTagName('audio')[0];
     </script>
   </body>
 </html>
