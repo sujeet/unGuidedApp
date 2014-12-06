@@ -182,8 +182,9 @@ core-scaffold::shadow core-header-panel::shadow #mainContainer {
 }
 
 #close-button {
-  top: -55px;
-  right: -82%;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
 }
 
 .tour {
